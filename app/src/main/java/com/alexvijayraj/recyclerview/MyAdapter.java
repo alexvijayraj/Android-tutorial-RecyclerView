@@ -1,0 +1,64 @@
+package com.alexvijayraj.recyclerview;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+/**
+ * Created by Alex vijay raj on 1/14/2018.
+ */
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+
+    private final Context context;
+    int[] drawable = { R.drawable.chicken_65, R.drawable.prawn_fry, R.drawable.tandoori_chicken,
+            R.drawable.mutton_biryani, R.drawable.chicken_biryani, R.drawable.mango_icecream};
+
+    String[] menu = { "Chicken 65", "Prawn fry", "Tandoori Chicken",
+            "Mutton Biryani", "Chicken Biryani", "Mango ice cream"};
+
+    String[] price = { "$8.99", "$14.99", "12.99",
+            "12.99", "9.99", "4.99"};
+
+    public MyAdapter(Context context){
+        this.context = context;
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = li.inflate(R.layout.menu_item, null);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        holder.ivItem.setImageResource(drawable[position]);
+        holder.tvItem.setText(menu[position]);
+        holder.tvPrice.setText(price[position]);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return menu.length;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+
+        ImageView ivItem;
+        TextView tvItem, tvPrice;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+
+            ivItem = (ImageView) itemView.findViewById(R.id.ivItem);
+            tvItem = (TextView) itemView.findViewById(R.id.tvItem);
+            tvPrice = (TextView) itemView.findViewById(R.id.tvPrice);
+        }
+    }
+}
