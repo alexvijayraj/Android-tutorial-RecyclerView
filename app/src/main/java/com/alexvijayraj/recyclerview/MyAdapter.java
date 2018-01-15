@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Alex vijay raj on 1/14/2018.
@@ -15,14 +16,14 @@ import android.widget.TextView;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private final Context context;
-    int[] drawable = { R.drawable.chicken_65, R.drawable.prawn_fry, R.drawable.tandoori_chicken,
-            R.drawable.mutton_biryani, R.drawable.chicken_biryani, R.drawable.mango_icecream};
 
-    String[] menu = { "Chicken 65", "Prawn fry", "Tandoori Chicken",
-            "Mutton Biryani", "Chicken Biryani", "Mango ice cream"};
+    int[] drawable = {R.drawable.chicken_65, R.drawable.prawn_fry, R.drawable.tandoori_chicken, R.drawable.mutton_biryani,
+            R.drawable.chicken_biryani, R.drawable.mango_icecream};
 
-    String[] price = { "$8.99", "$14.99", "12.99",
-            "12.99", "9.99", "4.99"};
+    String[] menu = {"Chicken 65", "Prawn fry", "Tandoori Chicken", "Mutton Biryani",
+            "Chicken Biryani", "Mango ice cream"};
+
+    String[] price = {"$8.99", "$14.99", "$12.99", "$12.99", "$9.99", "$4.99"};
 
     public MyAdapter(Context context){
         this.context = context;
@@ -30,8 +31,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = li.inflate(R.layout.menu_item, null);
+
+        View view = li.inflate(R.layout.menu_item,null);
+
         return new MyViewHolder(view);
     }
 
@@ -40,7 +44,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.ivItem.setImageResource(drawable[position]);
         holder.tvItem.setText(menu[position]);
         holder.tvPrice.setText(price[position]);
-
     }
 
     @Override
@@ -59,6 +62,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             ivItem = (ImageView) itemView.findViewById(R.id.ivItem);
             tvItem = (TextView) itemView.findViewById(R.id.tvItem);
             tvPrice = (TextView) itemView.findViewById(R.id.tvPrice);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String text = tvItem.getText().toString();
+                    Toast.makeText(context, text+" Pressed",Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
 }
